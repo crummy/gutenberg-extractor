@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/crummy/gutenberg-extractor#readme",
   "dependencies": {
+    "sequelize": "^6.0.0-beta.5",
+    "sqlite3": "^4.2.0",
     "xmldom": "^0.3.0",
     "xpath": "0.0.27"
   }

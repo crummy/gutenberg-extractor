@@ -1,6 +1,7 @@
 const fs = require('fs')
 const { read } = require('./xmlReader')
 const { parse } = require('./parseRdf')
+const { save } = require('./bookRepository')
 
 const files = fs.readdirSync('/Users/crummy/Downloads/cache/epub')
   .filter(file => file != '.DS_Store')
@@ -14,6 +15,7 @@ const main = async () => {
   for (const file of files) {
     const xml = await read(file)
     const book = parse(xml)
+    save(book)
   }
 }
 
