@@ -1,0 +1,22 @@
+{
+  "name": "gutenberg-extractor",
+  "version": "1.0.0",
+  "description": "Parse book metadata from the Gutenberg library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/crummy/gutenberg-extractor.git"
+  },
+  "keywords": [
+    "gutenberg"
+  ],
+  "author": "Malcolm Crum",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crummy/gutenberg-extractor/issues"
+  },
+  "homepage": "https://github.com/crummy/gutenberg-extractor#readme"
+}
