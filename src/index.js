@@ -9,7 +9,7 @@ const processBooks = async (path, limit) => {
   let fileCount = 0
   const books = await Promise.all(fs.readdirSync(path)
     .filter(file => file != '.DS_Store')
-    .filter(() => limit === undefined || fileCount++ <= limit)
+    .filter(() => limit === undefined || fileCount++ < limit)
     .map(file => {
       const idExtractor = /\d+/
       const id = idExtractor.exec(file)

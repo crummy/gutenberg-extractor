@@ -1,4 +1,5 @@
 const { Book, Author, Subject } = require('./models')
+const { Op } = require('sequelize')
 
 module.exports.save = async (book) => {
   const { id, title, publisher, authors, publicationDate, language, subjects, license } = book
@@ -55,6 +56,18 @@ module.exports.findBySubject = async (subject) => {
 module.exports.findByAuthor = async (name) => {
   const results = await Book.findAll({
     include: [{ model: Author, where: { name } }, Subject]
+  })
+  return results.map(toBook)
+}
+
+module.exports.findByDate = async (from, to) => {
+  const results = await Book.findAll({
+    where: {
+      publicationDate: {
+        [Op.between]: [from, to]
+      }
+    },
+    include: [ Author, Subject ]
   })
   return results.map(toBook)
 }

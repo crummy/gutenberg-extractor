@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { processBooks } = require('./index')
 const { truncate, init } = require('./models')
-const { findAll, findBySubject, findByAuthor, findBook } = require('./bookRepository')
+const { findAll, findBySubject, findByAuthor, findBook, findByDate } = require('./bookRepository')
 
 describe('processBooks', () => {
   beforeEach(async () => {
@@ -77,5 +77,21 @@ describe('queries', () => {
   it('should return null for missing book', async () => {
     const book = await findBook(99999)
     assert.equal(book, null)
+  })
+
+  it('should return all books published in 1971', async () => {
+    const books = await findByDate(new Date("1971-01-01"), new Date("1971-12-31"))
+    assert.equal(books.length, 1)
+    assert(books[0].publicationDate.startsWith('1971'))
+  })
+})
+
+describe('limit number of books to process', () => {
+  it('should limit books returned when limit is provided', async () => {
+    await init()
+    await truncate()
+    await processBooks("src/test/three", 1)
+    const books = await findAll()
+    assert.equal(books.length, 1)
   })
 })

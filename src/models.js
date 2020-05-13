@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:', {
-  logging: false
+  logging: (process.env.SQL_LOGGING == 'true')
 });
 
 const Book = sequelize.define('Book', {
@@ -29,6 +29,13 @@ const Book = sequelize.define('Book', {
     type: DataTypes.STRING,
     allowNull: false
   }
+}, {
+  indexes: [
+    {
+      using: 'BTREE',
+      fields: ['publicationDate']
+    }
+  ]
 });
 
 const Author = sequelize.define('Author', {
