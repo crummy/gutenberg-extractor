@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('sqlite::memory:', {
+  logging: false
+});
 
 const Book = sequelize.define('Book', {
   id: {
@@ -57,4 +59,4 @@ const init = async () => {
   await sequelize.sync()
 }
 
-module.exports = { Book, Author, Subject, init, BookAuthors }
+module.exports = { Book, Author, Subject, init, BookAuthors, BookSubjects }
