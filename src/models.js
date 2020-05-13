@@ -30,21 +30,31 @@ const Book = sequelize.define('Book', {
 });
 
 const Author = sequelize.define('Author', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoincrement: true,
-    primaryKey: true
-  },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   }
 });
 
 const Subject = sequelize.define('Subject', {
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  }
 })
 
-Book.belongsToMany(Author, { through: 'BookAuthors' })
-Author.belongsToMany(Book, { through : 'BookAuthors' })
+const BookAuthors = sequelize.define('BookAuthors', {}, { timestamps: false });
+Book.belongsToMany(Author, { through: BookAuthors })
+Author.belongsToMany(Book, { through : BookAuthors })
 
-module.exports = { Book, Author, Subject }
+const BookSubjects = sequelize.define('BookSubjects', {}, { timestamps: false });
+Book.belongsToMany(Subject, { through: BookSubjects })
+Subject.belongsToMany(Book, { through: BookSubjects })
+
+const init = async () => {
+  await sequelize.sync()
+}
+
+module.exports = { Book, Author, Subject, init, BookAuthors }
