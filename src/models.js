@@ -1,7 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:', {
-  logging: (process.env.SQL_LOGGING == 'true')
-});
+const { DataTypes } = require('sequelize');
+const sequelize = require('./database')
 
 const Book = sequelize.define('Book', {
   id: {

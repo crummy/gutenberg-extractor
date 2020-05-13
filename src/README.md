@@ -5,8 +5,8 @@ a SQLite database.
 
 # Notes
 
-The database is stored in memory. Authors and subjects are stored 
-in separate tables.
+The database is stored in memory by default. Authors and Subjects are stored 
+in separate tables, connected to Books by BookAuthors and BookSubjects tables.
 
 # Usage
 
@@ -18,5 +18,6 @@ Some environment variables are available:
 
 * `BOOK_FOLDER`: Directory that contains RDF files in named subfolders like `#/pg#.rdf`. **Required**.
 * `BOOK_LIMIT`: If set to an integer, will only parse books up to this number
-* `SQL_LOGGING`: If 'true', Sequelize will print SQL logging data.
+* `SQLITE_LOGGING`: If 'true', Sequelize will print SQL logging data.
+* `SQLITE_FILE`: If set, SQLite will persist data to this file instead of in-memory.
 
