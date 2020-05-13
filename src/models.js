@@ -55,12 +55,12 @@ const BookSubjects = sequelize.define('BookSubjects', {}, { timestamps: false })
 Book.belongsToMany(Subject, { through: BookSubjects })
 Subject.belongsToMany(Book, { through: BookSubjects })
 
-const init = async () => {
-  await sequelize.sync()
+const init = () => {
+  return sequelize.sync()
 }
 
-const truncate = async () => {
-  await sequelize.truncate()
+const truncate = () => {
+  return sequelize.truncate()
 }
 
 module.exports = { Book, Author, Subject, init, truncate }

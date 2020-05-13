@@ -1,14 +1,15 @@
 const fs = require('fs')
 const { read } = require('./xmlReader')
 const { parse } = require('./parseRdf')
-const { save, findAll, findBook, findByAuthor, findBySubject } = require('./bookRepository')
+const { save } = require('./bookRepository')
 const { init } = require('./models')
-const { distinct } = require('./filter')
 
-const processBooks = async (path) => {
+const processBooks = async (path, limit) => {
   await init()
+  let fileCount = 0
   const files = fs.readdirSync(path)
     .filter(file => file != '.DS_Store')
+    .filter(() => fileCount++ <= limit)
     .map(file => {
       const idExtractor = /\d+/
       const id = idExtractor.exec(file)

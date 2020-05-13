@@ -1,7 +1,7 @@
 const { Book, Author, Subject } = require('./models')
 
 module.exports.save = async (book) => {
-  const {id, title, publisher, authors, publicationDate, language, subjects, license } = book
+  const { id, title, publisher, authors, publicationDate, language, subjects, license } = book
 
   const entity = await Book.create({
     id,
@@ -40,21 +40,21 @@ module.exports.findBook = async (id) => {
   else return null
 }
 
-module.exports.findAll = () => {
-  const results = Book.findAll({ include: [ Author, Subject ]})
+module.exports.findAll = async () => {
+  const results = await Book.findAll({ include: [Author, Subject] })
   return results.map(toBook)
 }
 
 module.exports.findBySubject = async (subject) => {
   const results = await Book.findAll({
-    include: [ { model: Subject, where: { id: subject } }, Author ]
+    include: [{ model: Subject, where: { id: subject } }, Author]
   })
   return results.map(toBook)
 }
 
 module.exports.findByAuthor = async (name) => {
   const results = await Book.findAll({
-    include: [ { model: Author, where: { name } }, Subject ]
+    include: [{ model: Author, where: { name } }, Subject]
   })
   return results.map(toBook)
 }
