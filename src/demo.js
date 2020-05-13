@@ -3,7 +3,10 @@ const { findBook, findByAuthor, findBySubject } = require('./bookRepository')
 const { distinct } = require('./filter')
 
 const demo = async () => {
-  await processBooks(process.env.BOOK_FOLDER, 100)
+  const folder = process.env.BOOK_FOLDER
+  if (folder == null) throw new Error("Missing required environment variable BOOK_FOLDER")
+  const limit = process.env.BOOK_LIMIT || 100
+  await processBooks(folder, limit)
   const firstBook = await findBook(1)
   console.log("First book recorded in Project Gutenberg:", firstBook)
   const scifi = (await findBySubject('Science fiction'))
