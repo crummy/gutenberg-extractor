@@ -59,4 +59,8 @@ const init = async () => {
   await sequelize.sync()
 }
 
-module.exports = { Book, Author, Subject, init, BookAuthors, BookSubjects }
+const truncate = async () => {
+  await sequelize.truncate()
+}
+
+module.exports = { Book, Author, Subject, init, truncate }

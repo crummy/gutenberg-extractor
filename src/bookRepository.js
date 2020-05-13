@@ -1,4 +1,4 @@
-const { Book, Author, Subject, BookAuthors, BookSubjects } = require('./models')
+const { Book, Author, Subject } = require('./models')
 
 module.exports.save = async (book) => {
   const {id, title, publisher, authors, publicationDate, language, subjects, license } = book

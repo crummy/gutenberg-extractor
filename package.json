@@ -4,8 +4,9 @@
   "description": "Parse book metadata from the Gutenberg library",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/demo.js",
+    "test": "mocha **/*.test.js",
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,10 @@
     "sqlite3": "^4.2.0",
     "xmldom": "^0.3.0",
     "xpath": "0.0.27"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
+    "tmp": "^0.2.1"
   }
 }
