@@ -18,7 +18,7 @@ const Book = sequelize.define('Book', {
     allowNull: false
   },
   publicationDate: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
   language: {

@@ -7,19 +7,18 @@ const { init } = require('./models')
 const processBooks = async (path, limit) => {
   await init()
   let fileCount = 0
-  const files = fs.readdirSync(path)
+  const books = await Promise.all(fs.readdirSync(path)
     .filter(file => file != '.DS_Store')
-    .filter(() => fileCount++ <= limit)
+    .filter(() => limit === undefined || fileCount++ <= limit)
     .map(file => {
       const idExtractor = /\d+/
       const id = idExtractor.exec(file)
       return `${path}/${file}/pg${id}.rdf`
     })
+    .map(file => read(file))
+    .map(xml => parse(xml)))
 
-  for (const file of files) {
-    console.log(`Parsing ${file}`)
-    const xml = await read(file)
-    const book = parse(xml)
+  for (const book of books) {
     await save(book)
   }
 }

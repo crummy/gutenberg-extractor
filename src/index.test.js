@@ -1,16 +1,12 @@
 const assert = require('assert')
-const tmp = require('tmp')
 const { processBooks } = require('./index')
 const { truncate, init } = require('./models')
 const { findAll, findBySubject, findByAuthor, findBook } = require('./bookRepository')
 
 describe('processBooks', () => {
-  let tmpFolder
-
   beforeEach(async () => {
     await init()
     await truncate()
-    tmpFolder = tmp.dirSync()
   })
 
   it('should handle empty folder', async () => {
@@ -29,7 +25,7 @@ describe('processBooks', () => {
       id: 1,
       language: "en",
       license: "Public domain in the USA.",
-      publicationDate: new Date("1971-12-01"),
+      publicationDate: "1971-12-01",
       publisher: "Project Gutenberg",
       subjects: [
         "E201",
