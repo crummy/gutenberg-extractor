@@ -5,7 +5,7 @@ const { distinct } = require('./filter')
 const demo = async () => {
   const folder = process.env.BOOK_FOLDER
   if (folder == null) throw new Error("Missing required environment variable BOOK_FOLDER")
-  const limit = process.env.BOOK_LIMIT || 100
+  const limit = process.env.BOOK_LIMIT
   await processBooks(folder, limit)
   const firstBook = await findBook(1)
   console.log("First book recorded in Project Gutenberg:", firstBook)

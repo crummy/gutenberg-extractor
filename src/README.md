@@ -8,6 +8,11 @@ a SQLite database.
 The database is stored in memory by default. Authors and Subjects are stored 
 in separate tables, connected to Books by BookAuthors and BookSubjects tables.
 
+The project is small enough that there are no true "unit" tests - instead
+I aimed for more "subcutaneous" tests that test nearly the entirety of the
+app, as there's not much in the way of complex or branching logic that would
+be best tested with unit tests.
+
 # Usage
 
 * `npm run test` to run tests with Mocha
